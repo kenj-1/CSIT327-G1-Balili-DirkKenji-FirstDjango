@@ -8,7 +8,7 @@ Persistent project memory, architecture map, and phase-by-phase changelog for **
 
 ### Phase Progress
 - [x] **Phase 1: Audit, `.gitignore`, & `AGENT_CONTEXT.md` Initialization**
-- [ ] **Phase 2: Base Template & Bootstrap 5 CDN Setup**
+- [x] **Phase 2: Base Template & Bootstrap 5 CDN Setup**
 - [ ] **Phase 3: Sign-up Success Message & Auth Form Styling**
 - [ ] **Phase 4: Secure Profile `UpdateView` & Template**
 - [ ] **Phase 5: `README.md` & Final Verification**
@@ -16,9 +16,9 @@ Persistent project memory, architecture map, and phase-by-phase changelog for **
 ### Lab Requirements Checklist
 - [x] Comprehensive `.gitignore` (`venv/`, `.venv/`, `env/`, `__pycache__/`, `*.pyc`, `.env`, IDE configs)
 - [x] Persistent `AGENT_CONTEXT.md` tracking status, architecture, and changelog
-- [ ] Shared `templates/base.html` loading Bootstrap 5 CSS & JS bundle via CDN
-- [ ] Responsive Bootstrap 5 navbar (dynamic guest vs. authenticated links)
-- [ ] Dismissible Bootstrap 5 alert block (`alert alert-success alert-dismissible fade show`) for Django `messages`
+- [x] Shared `templates/base.html` loading Bootstrap 5 CSS & JS bundle via CDN
+- [x] Responsive Bootstrap 5 navbar (dynamic guest vs. authenticated links)
+- [x] Dismissible Bootstrap 5 alert block (`alert alert-success alert-dismissible fade show`) for Django `messages`
 - [ ] Sign-up view triggers `messages.success` (or `SuccessMessageMixin`) upon registration
 - [ ] All forms styled with Bootstrap 5 classes (`form-control`, `form-label`, `btn btn-primary`, `card`) via `forms.py` widget attributes
 - [ ] All templates (`signup.html`, `login.html`, `profile.html`, `home.html`) extend `base.html` and include `{% csrf_token %}` on forms
@@ -48,7 +48,7 @@ Balili_CampusConnect/
 │   └── asgi.py
 ├── accounts/                   # Authentication & CustomUser app
 │   ├── models.py               # CustomUser model (role, course)
-│   ├── forms.py                # CustomUserCreationForm (unstyled baseline)
+│   ├── forms.py                # CustomUserCreationForm (to be styled in Phase 3)
 │   ├── views.py                # SignUpView (CreateView)
 │   ├── urls.py                 # /accounts/signup/
 │   └── admin.py                # CustomUserAdmin
@@ -57,35 +57,27 @@ Balili_CampusConnect/
 │   ├── views.py                # DashboardView (LoginRequiredMixin), AdminPanelView (UserPassesTestMixin)
 │   └── urls.py                 # / (dashboard), /admin-panel/
 └── templates/                  # Global templates directory
-    ├── base.html               # Base layout (currently unstyled HTML)
+    ├── base.html               # Bootstrap 5 CDN layout, responsive navbar, dismissible messages alert
     ├── registration/
-    │   ├── login.html          # Login form template (currently unstyled)
-    │   └── signup.html         # Sign-up form template (currently unstyled)
+    │   ├── login.html          # Login form template (to be styled in Phase 3)
+    │   └── signup.html         # Sign-up form template (to be styled in Phase 3)
     └── dashboard/
         ├── home.html           # Authenticated user dashboard
         └── admin_panel.html    # Admin-only panel
 ```
 
-### Baseline Findings (Phase 1 Audit)
-1. **`campusconnect/settings.py`**:
-   - `django.contrib.messages` is already enabled in `INSTALLED_APPS`, `MIDDLEWARE`, and `TEMPLATES` context processors.
-   - `TEMPLATES['DIRS']` points to `BASE_DIR / "templates"`.
-   - `AUTH_USER_MODEL = 'accounts.CustomUser'`.
-2. **`campusconnect/urls.py`**:
-   - Routes `admin/`, `accounts/` (`django.contrib.auth.urls` and `accounts.urls`), and `""` (`dashboard.urls`).
-3. **`accounts/`**:
-   - `CustomUserCreationForm` exposes `("username", "email", "first_name", "last_name", "course")` without Bootstrap widget classes.
-   - `SignUpView` uses `CreateView` and redirects to `reverse_lazy("login")`, but does not yet trigger a registration success message.
-4. **`dashboard/`**:
-   - `DashboardView` (`LoginRequiredMixin`, `TemplateView`) renders `dashboard/home.html`.
-   - `AdminPanelView` (`LoginRequiredMixin`, `UserPassesTestMixin`, `TemplateView`) restricts access to `CustomUser.Role.ADMIN`.
-   - No `ProfileUpdateView` exists yet in the baseline.
-5. **`templates/`**:
-   - `base.html`, `registration/login.html`, `registration/signup.html`, and `dashboard/home.html` are plain unstyled HTML without Bootstrap 5 CDN or message alert rendering.
-
 ---
 
 ## Changelog
+
+### [2026-11-07 19:25] — Phase 2: Base Template & Bootstrap 5 CDN Setup
+- **Files Modified:**
+  - `templates/base.html`
+  - `AGENT_CONTEXT.md`
+- **Technical Summary:**
+  - Integrated Bootstrap 5.3.3 CSS and JS bundle strictly via jsDelivr CDN in `templates/base.html`.
+  - Built a responsive Bootstrap 5 navigation bar (`navbar-expand-lg navbar-dark bg-primary`) with dynamic links: displays `Log in` and `Sign up` for guests, and greeting, `Dashboard`, `Profile`, and `Log out` (POST form with `{% csrf_token %}`) for authenticated users.
+  - Added a Django `messages` loop rendering dismissible Bootstrap 5 alerts (`alert alert-success alert-dismissible fade show`) with a close button (`data-bs-dismiss="alert"`).
 
 ### [2026-11-07 19:14] — Phase 1: Audit, `.gitignore`, & `AGENT_CONTEXT.md` Initialization
 - **Files Created/Modified:**
