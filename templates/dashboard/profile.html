@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile | CampusConnect{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center g-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+                <h2 class="card-title h5 fw-bold mb-3">Profile Overview</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-0">
+                        <span class="text-muted small d-block">Username</span>
+                        <strong>{{ user.username }}</strong>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <span class="text-muted small d-block">Full Name</span>
+                        <strong>{{ user.get_full_name|default:"Not Set" }}</strong>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <span class="text-muted small d-block">Email</span>
+                        <strong>{{ user.email|default:"Not Set" }}</strong>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <span class="text-muted small d-block">Role</span>
+                        <span class="badge bg-primary">{{ user.get_role_display }}</span>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <span class="text-muted small d-block">Course</span>
+                        <strong>{{ user.course|default:"Not Set" }}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+                <h2 class="card-title h4 fw-bold mb-3">Edit Profile</h2>
+                <p class="text-muted small mb-4">Update your personal and academic information below.</p>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger py-2">
+                            {% for error in form.non_field_errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text small">{{ field.help_text|safe }}</div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

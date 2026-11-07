@@ -1,2 +1,17 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Admin Panel</h1>{% endblock %}
+
+{% block title %}Admin Panel | CampusConnect{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h1 class="h4 fw-bold mb-3">Admin Panel</h1>
+                <p class="text-muted mb-4">Restricted administration area for CampusConnect administrators.</p>
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
