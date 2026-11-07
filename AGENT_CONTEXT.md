@@ -4,14 +4,14 @@ Persistent project memory, architecture map, and phase-by-phase changelog for **
 
 ---
 
-## Current Project Status
+## Current Project Status (100% Complete)
 
 ### Phase Progress
 - [x] **Phase 1: Audit, `.gitignore`, & `AGENT_CONTEXT.md` Initialization**
 - [x] **Phase 2: Base Template & Bootstrap 5 CDN Setup**
 - [x] **Phase 3: Sign-up Success Message & Auth Form Styling**
 - [x] **Phase 4: Secure Profile `UpdateView` & Template**
-- [ ] **Phase 5: `README.md` & Final Verification**
+- [x] **Phase 5: `README.md` & Final Verification**
 
 ### Lab Requirements Checklist
 - [x] Comprehensive `.gitignore` (`venv/`, `.venv/`, `env/`, `__pycache__/`, `*.pyc`, `.env`, IDE configs)
@@ -24,7 +24,7 @@ Persistent project memory, architecture map, and phase-by-phase changelog for **
 - [x] All templates (`signup.html`, `login.html`, `profile.html`, `home.html`, `admin_panel.html`) extend `'base.html'` and include `{% csrf_token %}` on forms
 - [x] Secure Profile view using class-based `UpdateView` + `LoginRequiredMixin`
 - [x] `get_object(self, queryset=None)` overridden to return `self.request.user` (preventing unauthorized profile access via URL manipulation)
-- [ ] `README.md` formatted for `CSIT327` (Student Name: Dirk Kenji Balili, Section placeholder, feature overview, setup steps)
+- [x] `README.md` formatted for `CSIT327` (Student Name: Dirk Kenji Balili, Section: G1, feature overview, setup steps)
 
 ---
 
@@ -39,8 +39,9 @@ Persistent project memory, architecture map, and phase-by-phase changelog for **
 ```text
 Balili_CampusConnect/
 ├── manage.py
-├── .gitignore
-├── AGENT_CONTEXT.md
+├── README.md                   # Complete CSIT327 documentation (Dirk Kenji Balili, Section G1)
+├── .gitignore                  # Comprehensive exclusions (venv, __pycache__, .env, IDEs)
+├── AGENT_CONTEXT.md            # Persistent agent context & phase changelog
 ├── campusconnect/              # Project configuration package
 │   ├── settings.py             # Installed apps, templates dir, AUTH_USER_MODEL, redirects
 │   ├── urls.py                 # Root URL routing (admin/, accounts/, dashboard)
@@ -70,6 +71,14 @@ Balili_CampusConnect/
 ---
 
 ## Changelog
+
+### [2026-11-07 19:40] — Phase 5: `README.md` & Final Verification
+- **Files Modified:**
+  - `README.md`
+  - `AGENT_CONTEXT.md`
+- **Technical Summary:**
+  - Authored a complete `README.md` formatted for `CSIT327` featuring student details (`Dirk Kenji Balili`, Section `G1`), feature and security highlights, project tree, and step-by-step setup instructions (cloning, virtual environment, migrations, and running the server).
+  - Performed final verification across all rubric requirements and marked `AGENT_CONTEXT.md` as 100% complete.
 
 ### [2026-11-07 19:35] — Phase 4: Secure Profile `UpdateView` & Template
 - **Files Created/Modified:**
